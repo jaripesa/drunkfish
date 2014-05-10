@@ -22,6 +22,7 @@ public class MainServlet extends HttpServlet
 {
 
     final static HashMap<String, Page> pages = new HashMap<String, Page>();
+    final DrunkFishProperties properties = new DrunkFishProperties();
 
     static {
         pages.put("/",     new HomePage());
@@ -58,7 +59,7 @@ public class MainServlet extends HttpServlet
             page = pages.get("/");
         }
 
-        page.view(writer, params);
+        page.view(writer, params, properties.getProperties());
     }
 
 

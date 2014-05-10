@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.Properties;
 
 
 // one instance serves all - don't use class variables
@@ -17,7 +18,8 @@ public class InfoPage extends Page
 {
     @Override
     public void view(final PrintWriter w,
-                     final Map<String, String> params)
+                     final Map<String, String> params,
+                     final Properties properties)
     {
         begin(w, "Info Page");
 
@@ -31,11 +33,15 @@ public class InfoPage extends Page
             final HttpClient client = HttpClientBuilder.create().build();
 
             final String url = "https://api.moves-app.com/oauth/v1/access_token" +
-                "?grant_type=authorization_code&" +
-                "code=" + encode(code) + "&" +
-                "client_id=" + encode(CLIENT_ID) + "&" +
-                "client_secret=" + encode(CLIENT_SECRET) + "&" +
-                "redirect_uri=" + encode(HELP_PAGE_URL);
+                "?grant_type=authorization_code" +
+                "&code=" +
+                encode(code) +
+                "&client_id=" +
+                encode((String)properties.get("moves.client.id")) +
+                "&client_secret=" +
+                encode((String)properties.get("moves.client.secret")) +
+                "&redirect_uri=" +
+                encode((String)properties.get("moves.redirect.uri"));
 
             System.err.println(url);
 
@@ -55,13 +61,6 @@ public class InfoPage extends Page
                 while ((line = reader.readLine()) != null) {
                     System.err.println(line);
                 }
-
-                /*
-                 * invalid_grant: the provided authorization code is not valid,
-                 * has been revoked or has expired (after 5 minutes).
-                 * Note that both successful and unsuccessful requests revoke the code.
-                 *
-                 */
 
             } catch (IOException e) {
                 e.printStackTrace();
