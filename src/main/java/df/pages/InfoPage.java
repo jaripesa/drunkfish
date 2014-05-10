@@ -77,10 +77,8 @@ public class InfoPage extends Page
             final JsonElement jsonElement = parser.parse(jsonString.toString());
             final Map map = gson.fromJson(gson.toJson(jsonElement), Map.class);
             final String accessToken = (String)map.get("access_token");
-            final Double userId = (Double)map.get("user_id");
 
             System.err.println("Access Token " + accessToken);
-            System.err.println("User ID " + userId);
 
             url = "https://api.moves-app.com/api/1.1" +
                 "/user/places/daily/" +
