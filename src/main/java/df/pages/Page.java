@@ -12,6 +12,7 @@ public abstract class Page
 
     protected void out(final PrintWriter writer,
                        final String message)
+
     {
         writer.println("<h1>" + message + "</h1>");
     }

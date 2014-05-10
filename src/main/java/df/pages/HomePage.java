@@ -10,7 +10,7 @@ public class HomePage extends Page
     public void view(final PrintWriter w,
                      final String query)
     {
-        out(w, "Home Page");
+        out(w, "Home Page x");
         out(w, query);
     }
 }
