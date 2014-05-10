@@ -59,7 +59,13 @@ public class MainServlet extends HttpServlet
             page = pages.get("/");
         }
 
-        page.view(writer, params, properties.getProperties());
+        try {
+            page.view(writer, params, properties.getProperties());
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+            writer.println("Oops, something went wrong.");
+        }
     }
 
 

@@ -19,7 +19,6 @@ public abstract class Page
     {
         out(w, "<html><head><title>" + title + "</title><body><center>");
         out(w, "<h1>" + title + "</h1>");
-
     }
 
     protected void out(final PrintWriter w,

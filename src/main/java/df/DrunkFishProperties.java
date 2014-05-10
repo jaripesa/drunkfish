@@ -1,7 +1,5 @@
 package df;
 
-
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +10,7 @@ public class DrunkFishProperties
 {
     static final String PROPERTIES_PATH = "/opt/medios/drunkfish/conf/drunkfish.properties";
     final Properties properties = new Properties();
+
 
     public DrunkFishProperties()
     {
@@ -34,4 +33,5 @@ public class DrunkFishProperties
     {
         return properties;
     }
+
 }
