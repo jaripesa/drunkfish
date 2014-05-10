@@ -2,8 +2,10 @@ package df;
 
 import df.pages.HelpPage;
 import df.pages.HomePage;
-import df.pages.LoginPage;
+import df.pages.InfoPage;
 import df.pages.Page;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainServlet extends HttpServlet
 {
@@ -19,9 +24,10 @@ public class MainServlet extends HttpServlet
     final static HashMap<String, Page> pages = new HashMap<String, Page>();
 
     static {
-        pages.put("/", new HomePage());
-        pages.put("/login", new LoginPage());
+        pages.put("/",     new HomePage());
+        pages.put("/info", new InfoPage());
         pages.put("/help", new HelpPage());
+
     }
 
 
@@ -38,7 +44,13 @@ public class MainServlet extends HttpServlet
 
         final PrintWriter writer = response.getWriter();
         final String path = request.getPathInfo();
-        final String query = request.getQueryString();
+        final String queryString = request.getQueryString();
+        final List<NameValuePair> pairs = URLEncodedUtils.parse(queryString, Charset.forName("UTF-8"));
+        final Map<String,String> params = new HashMap<String, String>();
+
+        for (final NameValuePair pair : pairs) {
+            params.put(pair.getName(), pair.getValue());
+        }
 
         Page page = pages.get(path);
 
@@ -46,7 +58,7 @@ public class MainServlet extends HttpServlet
             page = pages.get("/");
         }
 
-        page.view(writer, query);
+        page.view(writer, params);
     }
 
 
