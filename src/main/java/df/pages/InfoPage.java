@@ -108,7 +108,6 @@ public class InfoPage extends Page
                 e.printStackTrace();
             }
 
-
         }
 
         end(w);

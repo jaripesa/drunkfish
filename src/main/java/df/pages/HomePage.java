@@ -26,14 +26,6 @@ public class HomePage extends Page
             "\">Begin</a>"
         );
 
-        out(w, "<br><a href=\"" +
-                "https://api.moves-app.com/oauth/v1/authorize" +
-                "?response_type=code" +
-                "&client_id=" + encode((String)properties.get("moves.client.id")) +
-                "&scope=" + encode("activity location") +
-                "\">Test</a>"
-        );
-
         out(w, "</font>");
         end(w);
     }

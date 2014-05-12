@@ -28,7 +28,6 @@ public class MainServlet extends HttpServlet
         pages.put("/",     new HomePage());
         pages.put("/info", new InfoPage());
         pages.put("/help", new HelpPage());
-
     }
 
 
